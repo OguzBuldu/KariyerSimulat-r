@@ -1,0 +1,384 @@
+using System;
+using System.Collections.Generic;
+using System.IO.Pipes;
+using System.Linq;
+using System.Runtime.InteropServices;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace FutbolSimulatörOyunu
+{
+    internal class Program
+    {
+        static void Main(string[] args)
+        {
+            Console.WriteLine("Kariyer Simülatör Oyununa Hogşlediniz.");
+            Console.WriteLine("**************************************");
+            
+
+
+
+
+            while (true)
+            {
+                Console.WriteLine("Lütfen İsim Soyisim Giriniz.");
+                string isim = Console.ReadLine();
+
+                Console.WriteLine("Sayın " + isim + " Lütfen Altyapı Yapmak İstediğiniz Kulübü Seçiniz.");
+                List<string> kulüpler = new List<string> { "Sivasspor", "Eyüpspor"};
+                kulüpler.Select((kulüp, index) => $"{index + 1}. {kulüp}")
+                    .ToList()
+                    .ForEach(Console.WriteLine);
+
+                string secim = Console.ReadLine();
+                if (secim == "1" || secim == "sivasspor")
+                {
+                    Console.WriteLine("Sivasspor'u Seçtiniz.");
+                    
+                    Sivas();
+                }
+            }
+
+
+        }
+
+        static void Sivas()
+        {
+            
+            
+
+            Random rnd = new Random();
+
+            int gol = rnd.Next(15);
+            int asist = rnd.Next(5);
+            Console.WriteLine("Attığınız Gol: " + gol);
+            Console.WriteLine("Yaptığınız Asist Sayıs: " + asist);
+
+            if (gol > 8 || asist > 4)
+            {
+                Console.WriteLine("Kulüp Performanınız Beğendi.");
+                Console.WriteLine("****************************");
+                Console.WriteLine("Performansınız İyi Olduğu İçin Bazı Kulüplerden Teklif Aldınız.");
+                Console.WriteLine("İşte Sizi İsteyen Külüpler; ");
+                Console.WriteLine("Karşıyaka, Eyüpspor, Hull City, Trabzonspor");
+                Console.WriteLine("Eğer Kalmak İstiyorsanız Lütfen -1- e Basınız. ");
+                string transfer = Console.ReadLine();
+
+                if (transfer == "1")
+                {
+                    Random sivas_gol = new Random();
+                    int siv_gol = sivas_gol.Next(15);
+
+                    Random sivas_asist = new Random();
+                    int siv_asist = sivas_asist.Next(10); 
+
+                    Console.WriteLine("Sivassporda Kaldınız.");
+                    Console.WriteLine("Attığınız Gol: " + siv_gol);
+                    Console.WriteLine("Yaptığınız Asist: " + siv_asist);
+                  
+
+
+                    if (siv_gol > 8 && siv_asist > 5)
+                    {
+                        Console.WriteLine("Sivasspor'da İyi Bir Sezon Geçirdiniz");
+                        Console.WriteLine("İşte Sizi İsteyen Külüpler; ");
+                        Console.WriteLine("Fenerbahçe, Galatasaray, Beşiktaş");
+                        Console.WriteLine("Kulüp Sizi Göndermek İstiyor. Lütfen Bu Üç Kulüpten Birini Seçiniz.");
+                        Random rnd1 = new Random();
+
+                        string üç_büyük = Console.ReadLine();
+
+                        if (üç_büyük == "fenerbahçe")
+                        {
+                            Console.WriteLine("Fenerbahçe'ye Hoşgeldiniz");
+                            Console.WriteLine("İki Yıl Sözleşme İmzaladınız.");
+
+                            int kupa = rnd1.Next(7);
+                            Random gol2 = new Random();
+                            Random asist2 = new Random();
+                            int atılan_gol = gol2.Next(45);
+                            int yapılan_asist = asist2.Next(20);
+
+                            Console.WriteLine("Fenerbahçe'de İki Yıl Kaldınız ve İşte İstatikleriniz; ");
+                            Console.WriteLine("Atılan Gol: " +atılan_gol);
+                            Console.WriteLine("Yapılan Asist: " + yapılan_asist);
+                            Console.WriteLine("Kazanılan Kupa: " + kupa);
+
+                            if (atılan_gol > 20 && yapılan_asist > 15)
+                            {
+                                Console.WriteLine("Size Yükek Bonservis Transfer Ücreti Geldi ve Kulübünüz Sizi Göndermek İstiyor.");
+                                Console.WriteLine("İşte Size Gelen Teklifler; ");
+                                Console.WriteLine("Arsenal = 7,5M $, Rotasyon Oyuncusu" );
+                                Console.WriteLine("Valencia = 8M $, Yedek Oyuncu");
+                                Console.WriteLine("Benfica = 12M $, As Takım Oyuncus");
+                                Console.WriteLine("Lütfen Bir Teklifi Seçin. Fenerbahçe'nin Tercihi -Benfica-");
+                                string secim = Console.ReadLine();
+
+                                if (secim == "arsenal")
+                                {
+                                    Console.WriteLine("Arsenal'i Seçtiniz.");
+                                    Console.WriteLine("Atılan Gol: " + atılan_gol);
+                                    Console.WriteLine("Yapılan Asist: " + yapılan_asist);
+                                    Console.WriteLine("Kazanılan Kupa: " + kupa);
+                                    Console.WriteLine("Kariyeriniz  Boyunca Arsenal'de Kaldınız.");
+                                    Random arsenal = new Random();
+                                    int ars_gol = arsenal.Next(150);
+
+                                    Random arsenal_asist = new Random();
+                                    int ars_asist = arsenal_asist.Next(80);
+
+                                    Random arsenal_kupa = new Random();
+                                    int ars_kupa = arsenal_kupa.Next(10);
+
+                                    Console.WriteLine("Kariyerinizde Attığınız Gol Sayısı: " , (atılan_gol + gol + ars_gol + siv_gol));
+                                    Console.WriteLine("Kariyeriniz Boyunca Yaptığınız Asist: " + (ars_asist + yapılan_asist + asist + siv_gol));
+                                    Console.WriteLine("Kariyeriniz Boyunca Kazandığınız Kupalar: " + (kupa + ars_kupa));
+
+                                }
+                                else if (secim == "valencia")
+                                {
+                                    Console.WriteLine("Valencia'yı Seçtiniz.");
+                                    Console.WriteLine("Atılan Gol: " + atılan_gol);
+                                    Console.WriteLine("Yapılan Asist: " + yapılan_asist);
+                                    Console.WriteLine("Kazanılan Kupa: " + kupa);
+
+                                    if (atılan_gol > 15)
+                                    {
+                                        Console.WriteLine("Real Madrid'den Teklif Aldınız. Gitmek İstiyorsanız Lütfen -1- e Basınız.");
+                                        string secim_real = Console.ReadLine();
+                                        if (secim_real == "1")
+                                        {
+                                            Console.WriteLine("Real Madrid İle 5 yıllık Sözleşme İmzaladınız.");
+                                            Random real_gol = new Random();
+                                            Random real_asist = new Random();
+                                            Random real_kupa = new Random();
+                                            Random ballondor = new Random();
+
+                                            int madrid_gol = real_gol.Next(200);
+                                            int madrid_asist = real_asist.Next(50);
+                                            int madrid_kupa = real_kupa.Next(15);
+                                            int balond = ballondor.Next(5);
+
+                                            Console.WriteLine("5 Yıllık İstatiskleriniz.");
+                                            Console.WriteLine(" Attığınız Gol Sayısı: " + madrid_gol);
+                                            Console.WriteLine("Yaptığınız Asist: " + madrid_asist);
+                                            Console.WriteLine("Kazanılan Kupa: " + madrid_kupa);
+                                            Console.WriteLine("Kazanılan Ballond'or: " + balond);
+
+                                            Console.WriteLine("Real Madrid'te Kalmak İster Misiniz.");
+                                            string kalmak = Console.ReadLine();
+                                            if (kalmak == "kalmak")
+                                            {
+                                                Console.WriteLine("6 Yıllık Sözleşme İmzaladınız.");
+
+                                                Random real_gol1 = new Random();
+                                                Random real_asist1 = new Random();
+                                                Random real_kupa1 = new Random();
+                                                Random ballondor1 = new Random();
+
+                                                int madrid_gol1 = real_gol1.Next(200);
+                                                int madrid_asist1 = real_asist1.Next(50);
+                                                int madrid_kupa1 = real_kupa1.Next(15);
+                                                int balond1 = ballondor1.Next(5);
+
+                                                Console.WriteLine("5 Yıllık İstatiskleriniz.");
+                                                Console.WriteLine(" Attığınız Gol Sayısı: " + madrid_gol1);
+                                                Console.WriteLine("Yaptığınız Asist: " + madrid_asist1);
+                                                Console.WriteLine("Kazanılan Kupa: " + madrid_kupa1);
+                                                Console.WriteLine("Kazanılan Ballond'or: " + balond1);
+
+                                                Console.WriteLine("Kariyerinizin Sonuna Geldiniz İşte Bu Zaman'a Kadar yaptığınız İstatistikler: ");
+                                                Console.WriteLine("Atılan Gol : "  + (atılan_gol + madrid_gol + madrid_gol1 + gol + siv_gol));
+                                                Console.WriteLine("Yapılan Asist: " + (yapılan_asist + madrid_asist + madrid_asist1 + asist + siv_asist));
+                                                Console.WriteLine("Kazanılan Kupa: " + (kupa + madrid_kupa + madrid_kupa1));
+                                                Console.WriteLine("Kazanılan Ballond'or: " + (balond1 + balond) );
+
+                                            }
+
+                                        }
+
+                                    }
+                                }
+                                else if ( secim == "benfica")
+                                {
+                                    Console.WriteLine("Benfica'yı Seçtiniz.");
+                                    Console.WriteLine("Atılan Gol: " + atılan_gol);
+                                    Console.WriteLine("Yapılan Asist: " + yapılan_asist);
+                                    Console.WriteLine("Kazanılan Kupa: " + kupa);
+
+                                    if (atılan_gol >  15)
+                                    {
+                                        Console.WriteLine("İtalya Seri A Liginden Teklifler Var.");
+                                        Console.WriteLine("Kulüp Sizi Göndermek İstiyor. İşte Size Gelen Teklifler.");
+                                        Console.WriteLine("1) Juventus: 60M , Yedek Oyuncu");
+                                        Console.WriteLine("2) İnter: 50M, As Takım Oyuncu");
+                                        Console.WriteLine("3) Milan 80M, As Takım Oyuncusu");
+
+                                        string seria = Console.ReadLine();
+
+                                        if (seria == "1" || seria == "juventus")
+                                        {
+                                            Console.WriteLine("Juventus ile 7 Yıllık Sözleşme İmzaladınız.");
+                                        }
+                                        if (seria =="2" ||seria == "inter")
+                                        {
+                                            Console.WriteLine("İnter İle 6 Yıllık Sözleşme İmzaladınız.");
+                                        }
+                                        else if (seria == "3" ||seria =="milan")
+                                        {
+                                            Console.WriteLine("Milan İle 4 Yıllık Sözleşme İmzaladınız.");
+                                        }
+                                    }
+                                    else if ( atılan_gol < 5)
+                                    {
+                                        Console.WriteLine("Kulüp Performansınız Beğenmedi ve Sizi Göndermek İstiyor.");
+                                    } 
+                                    else
+                                    {
+                                        Console.WriteLine("Kulüp Sizi Bir Sene Daha Kulüpte Kalmanızı İstiyor.");
+                                    }
+                                }
+
+                            }
+
+
+                        }
+
+                        else if (üç_büyük == "galatasaray")
+                        {
+                            Console.WriteLine("Galatasaray'a Hoşgedliniz.");
+                            Console.WriteLine("İki Yıl Sözleşme İmzaladınız.");
+                            int kupa = rnd1.Next(7);
+                            Random gol2 = new Random();
+                            Random asist2 = new Random();
+                            int atılan_gol = gol2.Next(45);
+                            int yapılan_asist = asist2.Next(20);
+
+                            Console.WriteLine("Galatasaray'da İki Yıl Kaldınız ve İşte İstatikleriniz; ");
+                            Console.WriteLine("Atılan Gol: " + atılan_gol);
+                            Console.WriteLine("Yapılan Asist: " + yapılan_asist);
+                            Console.WriteLine("Kazanılan Kupa: " + kupa);
+
+                            Console.WriteLine("Galatasaray Size Gelen Bütün Teklifleri Redetti.");
+                            Console.WriteLine("3 Yıllık Sözleşme İmzalamak İstiyor.");
+                            Console.WriteLine("Kabul Ediyor Musunuz?");
+                            string sözleşme = Console.ReadLine();
+
+                            if (sözleşme == "evet")
+                            {
+                                Console.WriteLine("Üç Yıl Sözleşme İmzaladınız.");
+                                
+                                Console.WriteLine("Atılan Gol: " + atılan_gol);
+                                Console.WriteLine("Yapılan Asist: " + yapılan_asist);
+                                Console.WriteLine("Kazanılan Kupa: " + kupa);
+
+                                
+
+                            }
+                            else if (sözleşme == "hayır")
+                            {
+                                Console.WriteLine("Sizi İsteyen Kulüpler;");
+                                Console.WriteLine("1)Celtic");
+                                Console.WriteLine("2) Hull City");
+                                Console.WriteLine("3) Fulham");
+                                Console.WriteLine("4 Bologna");
+                            }
+                        }
+
+                        else if (üç_büyük == "beşiktaş")
+                        {
+                            Console.WriteLine("Beşiktaş'a Hoşgeldiniz.");
+                            Console.WriteLine("İki Yıl Sözleşme İmzaladınız.");
+                            int kupa = rnd1.Next(7);
+                            Random gol2 = new Random();
+                            Random asist2 = new Random();
+                            int atılan_gol = gol2.Next(45);
+                            int yapılan_asist = asist2.Next(20);
+
+                            Console.WriteLine("Beşiktaş'da İki Yıl Kaldınız ve İşte İstatikleriniz; ");
+                            Console.WriteLine("Atılan Gol: " + atılan_gol);
+                            Console.WriteLine("Yapılan Asist: " + yapılan_asist);
+                            Console.WriteLine("Kazanılan Kupa: " + kupa);
+                        }
+
+                    }
+
+                    else
+                    {
+                       Console.WriteLine("Performansınız Beğenilmedi.");
+                       Console.WriteLine("Kulüp Sizi Göndermek İstiyor.");
+                       Console.WriteLine("İşte Sizi Transfer Etmek İsteyen Kulüpler;");
+                       Console.WriteLine("Karşıyaka, Göztepe, Erzurumspor, Malatyaspor");
+                        Console.WriteLine("Lütfen Biriniz Seçiniz.");
+                        string secim = Console.ReadLine();
+                        if (secim == "karşıyaka")
+                        {
+                            Console.WriteLine("Karşıyaka'yı Seçtiniz.");
+                        }
+                        else if (secim ==" göztepe")
+                        {
+                            Console.WriteLine("Göztepe'yi Seçtiniz.");
+                        }
+                        else if (secim == " erzurumspor")
+                        {
+                            Console.WriteLine("Erzurumspor'u Seçtiniz.");
+                        }
+                        else if (secim == "malatyaspor")
+                        {
+                            Console.WriteLine("Malatyaspor'u Seçtiniz.");
+                        }
+                    }
+                }
+            }
+            else
+            {
+                Console.WriteLine("Kulüp Performansınızı Beğenmedi O Yüzden Sizi Dost Küluplerden Birine Kiralamak İstiyor.");
+                Console.WriteLine("4 Eylül Belediye Spora Kiralandınız.");
+                if (gol > 7)
+                {
+                    Console.WriteLine("Kulüp Performansınız Beğendi ve  Sizi Tekrar Transfer Etti.");
+                }
+                else 
+                {
+                    Console.WriteLine("Kulüp Performanısızı Beğenmedi ve Bonservisinizi 4 Eylül Belediye Spora Verdi.");
+                    Console.WriteLine("4 Eylül Belediye Spor İle 3 Yıllık Sözleşme İmzaladınız.");
+
+                    Random eylülgol = new Random();
+                    Random eylülesist = new Random();
+
+                    int egol = eylülgol.Next(18);
+                    int easist = eylülesist.Next(11);
+
+                    Console.WriteLine("İşte İstatiskleriniz;");
+                    Console.WriteLine("***********************");
+                    Console.WriteLine("Attığınız Gol: " + egol);
+                    Console.WriteLine("Yapılan Asist: " + easist);
+
+                    if (egol > 7) 
+                    {
+                        Console.WriteLine("Kulüp Performansızız Beğendi ve Sizle Bir Sene Sözlşeme İmzaladı.");
+                    }
+
+                    else 
+                    { 
+                        Console.WriteLine("Kulüp Performansızız Beğenmedi Ama Size Bir Şans Daha Vermek İstiyor");
+
+
+
+                        int egol2 = eylülgol.Next(15);
+                        int easist2 = eylülesist.Next(10);
+
+                        if (egol2 > 7)
+                        {
+                            Console.WriteLine("Kulüp Performansızız Beğendi Ama Size Bir Teklif Gelmedi.");
+                        }
+                        else
+                        {
+                            Console.WriteLine("Kulüp Performansınızı Beğenmedi ve Sözleşmeyi Feshetti.");
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
